@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mori Schick's Database Final Project</title>
+  </head>
+  <body>
+    <form action="cgi-bin/delete_flight.py" method="get">
+      <table>
+	<tr>
+          <td>
+            Choose flight to delete:
+          </td>
+        </tr>
+	<tr>
+          <td>
+            Airline ID:
+          </td>
+          <td>
+            <select name="delete_airline_id">
+              <option value="JP">JP</option>
+              <option value="EI">EI</option>
+              <option value="P5">P5</option>
+              <option value="SU">SU</option>
+              <option value="AR">AR</option>
+              <option value="AM">AM</option>
+              <option value="AW">AW</option>
+              <option value="ZI">ZI</option>
+              <option value="AH">AH</option>
+              <option value="G9">G9</option>
+              <option value="KC">KC</option>
+              <option value="UU">UU</option>
+              <option value="BT">BT</option>
+              <option value="BP">BP</option>
+              <option value="2J">2J</option>
+              <option value="SM">SM</option>
+              <option value="TY">TY</option>
+              <option value="AC">AC</option>
+              <option value="TX">TX</option>
+	      <option value="CA">CA</option>
+              <option value="XK">XK</option>
+              <option value="EN">EN</option>
+              <option value="UX">UX</option>
+              <option value="AF">AF</option>
+              <option value="AI">AI</option>
+              <option value="IG">IG</option>
+              <option value="JS">JS</option>
+              <option value="NX">NX</option>
+              <option value="MD">MD</option>
+              <option value="KM">KM</option>
+              <option value="MK">MK</option>
+              <option value="9U">9U</option>
+              <option value="SW">SW</option>
+              <option value="NZ">NZ</option>
+              <option value="PX">PX</option>
+              <option value="YW">YW</option>
+              <option value="P4">P4</option>
+            </select>
+          </td>
+	  <td>
+            Flight No:
+          </td>
+          <td>
+            <input type="text" placeholder="00000-99999" name="delete_flight_no">
+          </td>
+        </tr>
+	<tr>
+          <td>
+            <input type="Submit" value="Delete Flight" name="">
+          </td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>

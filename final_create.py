@@ -16,7 +16,7 @@ TABLES['airlines'] = (
     ") ENGINE=InnoDB")
 
 TABLES['airports'] = (
-    "CREATE TABLE `airports` ("                             
+    "CREATE TABLE `airports` ("                                          #done? gotta reorder them so foreign key dependencies actually make sense
     "  `airport_id`  char(3)       NOT NULL,"
     "  `name`        varchar(40)   NOT NULL,"
     "  `addresss`    varchar(40)   NOT NULL,"
@@ -25,13 +25,13 @@ TABLES['airports'] = (
 
 TABLES['flights'] = (
     "CREATE TABLE `flights` ("
-    "  `airline_id` char(2)       NOT NULL,                  " 
+    "  `airline_id` char(2)       NOT NULL,                  "               #foreign key references airlines::airline_id
     "  `flight_no`  int(5)        NOT NULL,                  "
     "  `date_time`  timestamp(6)  NOT NULL,                  "               
-    "  `origin_id`  char(3)       NOT NULL,                  "               
-    "  `dest_id`    char(3)       NOT NULL,                  "             
+    "  `origin_id`  char(3)       NOT NULL,                  "               #foreign key references airports::airport_id
+    "  `dest_id`    char(3)       NOT NULL,                  "               #foreign key references airports::airport_id
     "  `amt_miles`  int(6)        NOT NULL,                  "
-    "  PRIMARY KEY (`airline_id`, `flight_no`),"                       
+    "  PRIMARY KEY (`airline_id`, `flight_no`),"                             #primary key = (airline_id, flight_no)
     "  KEY `flight_no` (`flight_no`),"
     "  CONSTRAINT `airline` FOREIGN KEY (`airline_id`) "
     "     REFERENCES `airlines` (`airline_id`) ON DELETE CASCADE,"
@@ -52,7 +52,9 @@ TABLES['travelers'] = (
     "  `passport_no`     int(10)      NOT NULL                 ,"
     "  PRIMARY KEY (`traveler_id`),"
     "  KEY `passport_no` (`passport_no`)"
-    "  ) ENGINE=InnoDB")
+    #"  CONSTRAINT `airport_dest` FOREIGN KEY (`dest_id`) "                 any foreign keys?
+    #"     REFERENCES `airports` (`airport_id`) ON DELETE CASCADE"
+    "  ) ENGINE=InnoDB")                                                  #how to code relations?? and how to code seat?
 
 TABLES['deptSchedule'] = (
     "CREATE TABLE `deptSchedule` ("
@@ -153,7 +155,15 @@ for table_name in TABLES:
             print(err.msg)
     else:
         print("OK")
-        
+
+try:
+    cursor.execute("DROP TRIGGER IF EXISTS dept_trigger")
+except mysql.connector.Error as err:
+  if err.errno == errorcode.ER_BAD_TABLE_ERROR:
+    print("You've got an error: cannot drop trigger...")
+  else:
+    raise
+
 
 cursor.close()
 cnx.close()
